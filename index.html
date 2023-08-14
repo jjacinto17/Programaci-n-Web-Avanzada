@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FillRect-FillStyle</title>
+    <style>
+        canvas {
+
+            border: 3px solid black;
+
+        }
+    </style>
+</head>
+
+<body>
+    <center>
+        <canvas id="canvas" width="500" height="500">
+
+
+
+
+        </canvas>
+    </center>
+
+
+    <script>
+        var canvas = document.getElementById("canvas");
+        var ctx = canvas.getContext("2d"); 
+
+        ctx.fillStyle = "#167BEC";
+        ctx.fillRect(30, 30, 70, 70);
+
+        ctx.fillStyle = "#C01121";
+        ctx.fillRect(85, 85, 70, 70);
+
+        ctx.fillStyle = "#F376EC";
+        ctx.globalAlpha = 0.8;
+        ctx.fillRect(140, 140, 70, 70);
+
+        ctx.fillStyle = "black";
+        ctx.font = "12px Arial"
+        ctx.fillText("Josue Jacinto" , 2, 495)
+        ctx.fillText("FillRect - FillStyle" , 2, 478)
+
+    </script>
+
+</body>
+
+</html>
