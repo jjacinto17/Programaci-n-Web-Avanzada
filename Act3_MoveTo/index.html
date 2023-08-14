@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actividad 3</title>
+    <style>
+        canvas {
+            border: 3px solid black;
+        }
+    </style>
+</head>
+
+<body>
+
+    <center>
+        <canvas id="Canvas" width="500" height="500 "></canvas>
+    </center>
+
+    <script>
+
+        const canvas = document.getElementById("Canvas");
+        const ctx = canvas.getContext("2d");
+
+        ctx.beginPath();
+        ctx.moveTo(270, 120); // Linea
+        ctx.lineTo(350, 200);
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.moveTo(300, 180);
+        ctx.lineTo(400, 250);
+        ctx.lineTo(330, 250);
+        ctx.closePath();
+        ctx.fillStyle = "#F376EC";
+        ctx.fill();
+
+
+    </script>
+
+</body>
+
+</html>
