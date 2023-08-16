@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canvas</title>
+    <style>
+        canvas {
+
+            border: 3px black solid;
+        }
+    </style>
+</head>
+
+<body>
+
+    <center>
+        <canvas id="Canvas" width="500" height="500"></canvas>
+    </center>
+
+    <script>
+        var canvas = document.getElementById("Canvas");
+        var ctx = canvas.getContext("2d");
+
+
+        ctx.beginPath();
+        ctx.arc(150, 150, 50, 0, 2 * Math.PI);
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.strokeStyle = "red";
+        ctx.arc(200, 150, 50, 0, 2 * Math.PI);
+        ctx.stroke();
+
+
+        ctx.font = "25px Arial Black"
+        ctx.fillText("Josue Jacinto", 200, 50);
+
+        ctx.strokeText("Josue Jacinto", 200, 80);
+
+
+        const grd = ctx.createRadialGradient(75, 50, 5, 90, 60, 100);
+        grd.addColorStop(0, "blue");
+        grd.addColorStop(1, "white");
+
+
+        ctx.fillStyle = grd;
+        ctx.fillRect(10, 10, 150, 100);
+
+        const grd2 = ctx.createLinearGradient(0, 0, 140, 0);
+
+        grd2.addColorStop(0, "yellow");
+
+        grd2.addColorStop(1, "purple");
+
+        ctx.fillStyle = grd2;
+        ctx.fillRect(20, 250, 150, 100);
+
+
+        const img = new Image();
+        img.onload = function () {
+            ctx.drawImage(img, 280, 250, 250, 250);
+        };
+        img.src = "p1.png";
+
+
+
+
+    </script>
+
+</body>
+
+</html>
