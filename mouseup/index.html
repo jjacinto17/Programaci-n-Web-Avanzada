@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MouseUp and Down</title>
+    <style>
+        canvas {
+            border: 3px solid black;
+        }
+    </style>
+</head>
+
+<body>
+    <center>
+        <canvas id="canvas" width="500" height="500"></canvas>
+    </center>
+    <script>
+        var canvas = document.getElementById("canvas");
+        var ctx = canvas.getContext("2d");
+        var isMouseOver = false;
+        var isCircle = true;
+        var currentColor = getRandomColor();
+        var premX = null;
+        var premY = null;
+        isMouseDown = false;
+        
+
+        canvas.addEventListener("mousedown", () => {
+            isMouseDown = true;
+
+            if (isMouseOver) {
+                var rect = canvas.getBoundingClientRect();
+                var mouseX = event.clientX - rect.left;
+                var mouseY = event.clientY - rect.top;
+
+                ctx.beginPath();
+
+                if (isCircle) {
+                    ctx.arc(mouseX, mouseY, 50, 0, 2 * Math.PI);
+                } else {
+                    ctx.rect(mouseX - 50, mouseY - 50, 100, 100);
+                }
+
+                ctx.globalAlpha = 0.5;
+                ctx.fillStyle = currentColor;
+                ctx.fill();
+                ctx.globalAlpha = 1;
+                ctx.stroke();
+            }
+        });
+
+        canvas.addEventListener("mouseup", () => {
+
+            isMouseDown=false;
+
+
+        });
+
+        canvas.addEventListener("mouseover", () => {
+            isMouseOver = true;
+            currentColor = getRandomColor();
+        });
+
+        canvas.addEventListener("mouseout", () => {
+            isMouseOver = false;
+            isCircle = !isCircle;
+            premX = null;
+            premY = null;
+        });
+
+        canvas.addEventListener("mousemove", () => {
+            if (isMouseDown) {
+                var rect = canvas.getBoundingClientRect();
+                var mouseX = event.clientX - rect.left;
+                var mouseY = event.clientY - rect.top;
+
+                if (premX !== null && premY !== null) {
+
+                    ctx.beginPath();
+
+                    if (isCircle) {
+                        ctx.arc(mouseX, mouseY, 2, 0, 2 * Math.PI);
+                    } else {
+                        ctx.rect(mouseX, mouseY, 4, 4);
+                    }
+
+                    ctx.fillStyle = "black";
+                    ctx.fill();
+                    
+                }
+
+                premX = mouseX;
+                premY = mouseY;
+            }
+        });
+
+        function getRandomColor() {
+            var letters = '0123456789ABCDEF';
+            var color = '#';
+            for (var i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
+    </script>
+</body>
+
+</html>
