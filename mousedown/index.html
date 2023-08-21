@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mousedown</title>
+    <style>
+        canvas {
+            border: 3px solid black;
+        }
+    </style>
+</head>
+
+<body>
+
+    <center>
+        <canvas id="canvas" width="500" height="500"></canvas>
+    </center>
+
+    <script>
+        var canvas = document.getElementById("canvas");
+        var ctx = canvas.getContext("2d");
+
+        canvas.addEventListener("mousedown", (event) => {
+            var rect = canvas.getBoundingClientRect();
+            var mouseX = event.clientX - rect.left;
+            var mouseY = event.clientY - rect.top;
+
+            ctx.beginPath();
+            ctx.arc(mouseX, mouseY, 50, 0, 2 * Math.PI);
+            ctx.globalAlpha = 0.5;
+            ctx.fillStyle = "blue"
+            ctx.fill();
+        });
+
+    </script>
+
+</body>
+
+</html>
