@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mouseover</title>
+    <style>
+        canvas {
+            border: 3px solid black;
+        }
+    </style>
+</head>
+
+<body>
+    <center>
+        <canvas id="canvas" width="500" height="500"></canvas>
+    </center>
+
+    <script>
+        var canvas = document.getElementById("canvas");
+        var ctx = canvas.getContext("2d");
+        var currentColor = getRandomColor();
+        var isMouseOver = false;
+
+        canvas.addEventListener("mousedown", () => {
+            if (isMouseOver) {
+                var rect = canvas.getBoundingClientRect();
+                var mouseX = event.clientX - rect.left;
+                var mouseY = event.clientY - rect.top;
+
+                ctx.beginPath();
+                ctx.arc(mouseX, mouseY, 50, 0, 2 * Math.PI);
+                ctx.globalAlpha = 0.5;
+                ctx.fillStyle = currentColor;
+                ctx.fill();
+                ctx.globalAlpha = 1;
+                ctx.stroke();
+
+            }
+        });
+
+        canvas.addEventListener("mouseover", () => {
+            isMouseOver = true;
+            currentColor = getRandomColor();
+        });
+
+        function getRandomColor() {
+            var letters = '0123456789ABCDEF';
+            var color = '#';
+            for (var i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
+    </script>
+</body>
+
+</html>
