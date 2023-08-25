@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avatar</title>
+
+    <style>
+        canvas {
+
+            border: 3px solid black;
+
+            color: black;
+        }
+    </style>
+</head>
+
+<body>
+    <center>
+        <canvas id="canvas" width="500" height="500"></canvas>
+    </center>
+
+    <script>
+        var canvas = document.getElementById("canvas");
+        var ctx = canvas.getContext("2d");
+
+        ctx.fillStyle = "gray";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        canvas.addEventListener("mousedown", (e) => {
+            var rect = canvas.getBoundingClientRect();
+            var mouseX = Math.round(e.clientX - rect.left);
+            var mouseY = Math.round(e.clientY - rect.top);
+
+            console.log(mouseX, mouseY);
+        });
+
+
+
+
+        //circulo exterior
+        ctx.beginPath();
+        ctx.arc(248, 248, 200, 0, 2 * Math.PI);
+        ctx.fillStyle = "White";
+        ctx.fill();
+        ctx.closePath();
+
+        //cuerpo
+        ctx.fillStyle = "#8D070F";
+        ctx.fillRect(184, 282, 120, 170);
+        //brazos
+        ctx.fillStyle = "#1F1F1F";
+        ctx.fillRect(144, 282, 40, 120);
+        ctx.fillRect(304, 282, 40, 120);
+        //manos
+        ctx.fillStyle = "#E4CF95";
+        ctx.fillRect(144, 400, 40, 15);
+        ctx.fillRect(304, 400, 40, 15);
+
+        //cabeza
+        ctx.beginPath();
+        ctx.fillStyle = "#E4CF95"
+        ctx.arc(240, 212, 65, 0, 2 * Math.PI);
+        ctx.fill();
+        ctx.closePath();
+        //cuello
+        ctx.fillRect(220, 270, 40, 12);
+        //cuello-cuerpo
+        ctx.beginPath();
+        ctx.fillStyle = "#E4CF95"
+        ctx.arc(240, 278, 20, 0, 1 * Math.PI);
+        ctx.fill();
+        ctx.closePath();
+
+        //ojo izquierdo
+        ctx.beginPath();
+        ctx.fillStyle = "white"
+        ctx.ellipse(213, 207, 10, 8, 0, 0, 2 * Math.PI);
+        ctx.fill();
+        ctx.closePath();
+        ctx.beginPath();
+        ctx.fillStyle = "black"
+        ctx.arc(213, 207, 4, 0, 2 * Math.PI);
+        ctx.fill();
+        ctx.closePath();
+
+        //ojo derecho
+        ctx.beginPath();
+        ctx.fillStyle = "white"
+        ctx.ellipse(265, 207, 10, 8, 0, 0, 2 * Math.PI);
+        ctx.fill();
+        ctx.closePath();
+        ctx.beginPath();
+        ctx.fillStyle = "black"
+        ctx.arc(265, 207, 4, 0, 2 * Math.PI);
+        ctx.fill();
+        ctx.closePath();
+
+
+        //lente derecho
+        ctx.beginPath();
+        ctx.fillStyle = "rgba(128, 128, 128, 0.5)";
+        ctx.fillRect(248, 193, 35, 28);
+        ctx.fill();
+        ctx.closePath();
+
+        //lente izquierdo
+        ctx.beginPath();
+        ctx.fillStyle = "rgba(128, 128, 128, 0.51)";
+        ctx.fillRect(196, 193, 35, 28);
+        ctx.fill();
+        ctx.closePath();
+
+
+        //lente izquierdo-marco
+        ctx.strokeRect(196, 193, 35, 28);
+        ctx.fill();
+
+        //lente derecho-marco
+        ctx.strokeRect(248, 193, 35, 28);
+        ctx.fill();
+
+        //puente
+        ctx.fillStyle = "black";
+        ctx.fillRect(230, 200, 19, 4);
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.fillStyle = "black"
+        ctx.arc(240, 217, 9, 3.2, 2 * Math.PI);
+        ctx.fill();
+        ctx.closePath();
+        ctx.beginPath();
+        ctx.fillStyle = "#E4CF95"
+        ctx.arc(240, 218, 5, 3.2, 2 * Math.PI);
+        ctx.fill();
+        ctx.closePath();
+
+        //linea izquierda
+        ctx.beginPath();
+        ctx.moveTo(176, 200);
+        ctx.lineTo(196, 205);
+        ctx.strokeStyle = "black";
+        ctx.lineWidth = 2;
+        ctx.stroke();
+        ctx.closePath();
+
+
+        //linea derecha
+        ctx.beginPath();
+        ctx.moveTo(304, 200);
+        ctx.lineTo(284, 205);
+        ctx.strokeStyle = "black";
+        ctx.lineWidth = 2;
+        ctx.stroke();
+        ctx.closePath();
+
+        //boca
+        ctx.beginPath();
+        ctx.fillStyle = "white"
+        ctx.arc(240, 240, 20, 0, 1 * Math.PI);
+        ctx.fill();
+        ctx.closePath();
+
+        //cabello
+
+        ctx.beginPath();
+        ctx.fillStyle = "#2F2F25";
+        ctx.moveTo(177, 210);
+        ctx.quadraticCurveTo(170, 177, 205, 150)
+        ctx.moveTo(205, 150);
+        ctx.quadraticCurveTo(245, 130, 290, 160)
+        ctx.moveTo(290, 160);
+        ctx.quadraticCurveTo(315, 200, 305, 208);
+        ctx.strokeStyle = "#2F2F25";
+        ctx.lineWidth = 2;
+        ctx.fill();
+        ctx.stroke();
+        ctx.closePath();
+
+        ctx.beginPath();
+        ctx.moveTo(180, 210);
+        ctx.lineTo(196, 175);
+        ctx.lineTo(208, 180);
+        ctx.lineTo(225, 176);
+        ctx.lineTo(236, 185);
+        ctx.lineTo(251, 186);
+        ctx.lineTo(264, 170);
+        ctx.lineTo(284, 174);
+        ctx.lineTo(298, 200);
+        ctx.strokeStyle = "#2F2F25";
+        ctx.lineWidth = 20;
+        ctx.stroke();
+        ctx.closePath();
+        ctx.fillRect(198, 150, 80, 26);
+        ctx.fillRect(275, 158, 20, 10);
+
+        //nombre
+        ctx.fillStyle = "black";
+        ctx.font = "12px Arial"
+        ctx.fillText("Josue Jacinto" , 2, 495)
+
+
+
+
+
+        //limitador
+        ctx.beginPath();
+        ctx.strokeStyle = "gray";
+        ctx.lineWidth = 12;
+        ctx.arc(248, 248, 208, 0, 2 * Math.PI);
+        ctx.stroke();
+        ctx.closePath();
+
+
+
+
+
+
+    </script>
+</body>
+
+</html>
