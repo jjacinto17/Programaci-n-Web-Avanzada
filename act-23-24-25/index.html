@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<style>
+canvas{
+    border: 3px solid black;
+}
+</style>
+<body>
+    <center><canvas id="canvas" width="500" height="500"></canvas></center>
+</body>
+<script>
+    var canvas = document.getElementById('canvas');
+    var ctx = canvas.getContext("2d");
+    var x = 225;
+    var y = 230;
+    var direccion_x = 0;
+    var direccion_y = 0;
+    var speed = 2;
+
+    function getRandomColor() {
+        var r = Math.floor(Math.random() * 256);
+        var g = Math.floor(Math.random() * 256);
+        var b = Math.floor(Math.random() * 256);
+        return `rgb(${r},${g},${b})`;
+    }
+
+    window.requestAnimationFrame = (function () {
+        return window.requestAnimationFrame ||
+            window.webkitRequestAnimationFrame ||
+            window.mozRequestAnimationFrame ||
+            function (callback) {
+                window.setTimeout(callback, 17);
+            };
+    }());
+
+    document.addEventListener("keydown", (e) => {
+        switch(event.keyCode) {
+            case 37:
+                direccion_x = -speed;
+                direccion_y = 0;
+                break;
+            case 38:
+                direccion_x = 0;
+                direccion_y = -speed;
+                break;
+            case 39:
+                direccion_x = speed;
+                direccion_y = 0;
+                break;
+            case 40:
+                direccion_x = 0;
+                direccion_y = speed;
+                break;
+            case 32: 
+                speed += 2; 
+                break;
+        }
+    });
+    function update() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        x = (x + direccion_x + canvas.width) % canvas.width;
+        y = (y + direccion_y + canvas.height) % canvas.height;
+
+        ctx.fillStyle = getRandomColor();
+        ctx.fillRect(x, y, 50, 50);
+        ctx.strokeRect(x, y, 50, 50);
+
+        requestAnimationFrame(update);
+    }
+    update();
+</script>
+</html>
