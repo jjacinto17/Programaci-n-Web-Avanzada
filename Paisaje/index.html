@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paisaje</title>
+    <style>
+        canvas {
+           border: 3px black solid;
+        }
+    </style>
+</head>
+
+<body>
+
+    <center> <canvas id="canvas" width="600" height="600"> </canvas></center>
+
+    <script>
+
+        var canvas = document.getElementById("canvas");
+        var ctx = canvas.getContext("2d");
+
+
+        ctx.fillStyle = "#2541C0"
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        canvas.addEventListener("mousedown", (e) => {
+            var rect = canvas.getBoundingClientRect();
+            var mouseX = Math.round(e.clientX - rect.left);
+            var mouseY = Math.round(e.clientY - rect.top);
+
+            console.log(mouseX, mouseY);
+        });
+
+        //luna
+        ctx.beginPath();
+        ctx.arc(303, 135, 80, 0, 2 * Math.PI);
+        ctx.fillStyle = "#EDEEEE";
+        ctx.fill();
+        ctx.closePath();
+
+        ctx.beginPath();
+        ctx.arc(355, 85, 80, 0, 2 * Math.PI);
+        ctx.fillStyle = "#2541C0";
+        ctx.fill();
+        ctx.closePath();
+
+        //montañas
+
+        ctx.beginPath();
+        ctx.moveTo(0, 377);
+        ctx.lineTo(181, 274);
+        ctx.lineTo(324, 401);
+        ctx.lineTo(0, 500);
+        ctx.fillStyle = "#B0D1FF"
+        ctx.fill();
+        ctx.closePath();
+
+        ctx.beginPath();
+        ctx.moveTo(237, 418);
+        ctx.lineTo(437, 250);
+        ctx.lineTo(602, 360);
+        ctx.lineTo(602, 450)
+        ctx.fillStyle = "#E8F2FF"
+        ctx.fill();
+        ctx.closePath();
+
+        //montañas-pasto
+
+        ctx.beginPath();
+        ctx.moveTo(0, 388);
+        ctx.lineTo(602, 426);
+        ctx.lineTo(602, 460);
+        ctx.lineTo(0, 480)
+        ctx.fillStyle = "#05461E"
+        ctx.fill();
+        ctx.closePath();
+
+        ctx.beginPath();
+        ctx.moveTo(602, 460);
+        ctx.lineTo(0, 479);
+        ctx.lineTo(0, 520);
+        ctx.lineTo(602, 550)
+        ctx.fillStyle = "#046027"
+        ctx.fill();
+        ctx.closePath();
+        
+        ctx.beginPath();
+        ctx.moveTo(0, 520);
+        ctx.lineTo(602, 550);
+        ctx.lineTo(602, 600)
+        ctx.lineTo(0, 600);
+        ctx.fillStyle = "#2B9B56"
+        ctx.fill();
+        ctx.closePath();
+
+        //arboles
+
+        ctx.beginPath();
+        ctx.moveTo(44, 454);
+        ctx.lineTo(51, 420);
+        ctx.lineTo(57, 454);
+        ctx.fillStyle = "#021A0B"
+        ctx.fill();
+        ctx.closePath();
+
+        ctx.beginPath();
+        ctx.moveTo(120, 460);
+        ctx.lineTo(126, 430);
+        ctx.lineTo(131, 460);
+        ctx.fillStyle = "#021A0B"
+        ctx.fill();
+        ctx.closePath();
+        
+        ctx.beginPath();
+        ctx.moveTo(150, 440);
+        ctx.lineTo(156, 410);
+        ctx.lineTo(161, 440);
+        ctx.fillStyle = "#021A0B"
+        ctx.fill();
+        ctx.closePath();
+
+        ctx.beginPath();
+        ctx.moveTo(200, 440);
+        ctx.lineTo(206, 410);
+        ctx.lineTo(211, 440);
+        ctx.fillStyle = "#021A0B"
+        ctx.fill();
+        ctx.closePath();
+
+        // capa 2- a
+
+        ctx.beginPath();
+        ctx.moveTo(350, 520);
+        ctx.lineTo(360, 480);
+        ctx.lineTo(370, 520);
+        ctx.fillStyle = "#0F422F"
+        ctx.fill();
+        ctx.closePath();
+
+        ctx.beginPath();
+        ctx.moveTo(280, 520);
+        ctx.lineTo(290, 480);
+        ctx.lineTo(300, 520);
+        ctx.fillStyle = "#0F422F"
+        ctx.fill();
+        ctx.closePath();
+        
+        ctx.beginPath();
+        ctx.moveTo(450, 500);
+        ctx.lineTo(460, 460);
+        ctx.lineTo(470, 500);
+        ctx.fillStyle = "#0F422F"
+        ctx.fill();
+        ctx.closePath();
+
+        ctx.beginPath();
+        ctx.moveTo(520, 520);
+        ctx.lineTo(530, 480);
+        ctx.lineTo(540, 520);
+        ctx.fillStyle = "#0F422F"
+        ctx.fill();
+        ctx.closePath();
+
+        //capa 3- a
+
+        ctx.beginPath();
+        ctx.moveTo(150, 590);
+        ctx.lineTo(180, 515);
+        ctx.lineTo(210, 590);
+        ctx.fillStyle = "#247442"
+        ctx.fill();
+        ctx.closePath();
+
+        ctx.beginPath();
+        ctx.moveTo(50, 570);
+        ctx.lineTo(80, 495);
+        ctx.lineTo(110, 570);
+        ctx.fillStyle = "#247442"
+        ctx.fill();
+        ctx.closePath();
+        
+        ctx.beginPath();
+        ctx.moveTo(250, 595);
+        ctx.lineTo(280, 525);
+        ctx.lineTo(310, 595);
+        ctx.fillStyle = "#247442"
+        ctx.fill();
+        ctx.closePath();
+
+       
+
+    </script>
+</body>
+
+</html>
