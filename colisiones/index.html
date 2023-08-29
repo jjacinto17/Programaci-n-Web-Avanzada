@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+</head>
+<style>
+    canvas {
+        border: 3px solid black;
+    }
+</style>
+
+<body>
+    <center><canvas id="canvas" width="500" height="500"></canvas></center>
+</body>
+<script>
+    var canvas = document.getElementById('canvas');
+    var ctx = canvas.getContext("2d");
+    var x = 225;
+    var y = 230;
+    var direccion_x = 0;
+    var direccion_y = 0;
+    var speed = 6;
+    var tx = 0, ty = 0;
+    var dir = 0;
+    var Color = getRandomColor();
+
+
+    window.requestAnimationFrame = (function () {
+        return window.requestAnimationFrame ||
+            window.webkitRequestAnimationFrame ||
+            window.mozRequestAnimationFrame ||
+            function (callback) {
+                window.setTimeout(callback, 17);
+            };
+    }());
+
+    document.addEventListener("keydown", (e) => {
+        switch (event.keyCode) {
+            case 37:
+                dir = 4;
+                break;
+            case 38:
+                dir = 1;
+                break;
+            case 39:
+                dir = 3;
+                break;
+            case 40:
+                dir = 2;
+                break;
+            case 32:
+                speed += 2;
+                break;
+        }
+
+
+
+    });
+
+    function update() {
+       // ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+       ctx.fillStyle="white";
+       ctx.fillRect(0,0,canvas.width, canvas.height);
+       color = getRandomColor();
+        // x = (x + direccion_x + canvas.width) % canvas.width;
+        //y = (y + direccion_y + canvas.height) % canvas.height;
+
+        if (dir == 1) {
+            y -= speed;
+            if (y + 50 < 0) {
+                y = canvas.height + 50;
+            }
+        }
+
+        if (dir == 2) {
+            y += speed;
+            if (y + 50 > canvas.height) {
+                y = -50;
+            }
+        }
+
+        if (dir == 3) {
+            x += speed;
+            if (x + 50 > canvas.width) {
+                x = -50;
+            }
+        }
+
+        if (dir == 4) {
+            x -= speed;
+            if (x + 50 < 0) {
+                x = canvas.width + 50;
+            }
+        }
+        if (x < tx + 20 &&
+
+            x + 50 > tx &&
+
+            y < ty + 20 &&
+
+            y + 50 > ty) {
+
+
+            tx = Math.random()*500;
+            ty = Math.random()*500;
+
+        }
+
+        ctx.fillStyle = color;
+        ctx.fillRect(x, y, 50, 50);
+        ctx.strokeRect(x, y, 50, 50);
+
+        ctx.fillStyle = "black";
+        ctx.fillRect(tx, ty, 20, 20);
+        ctx.strokeRect(tx, ty, 20, 20);
+
+
+        window.requestAnimationFrame(update);
+    }
+
+    function getRandomColor() {
+        var r = Math.floor(Math.random() * 256);
+        var g = Math.floor(Math.random() * 256);
+        var b = Math.floor(Math.random() * 256);
+        return `rgb(${r},${g},${b})`;
+    }
+
+    update();
+</script>
+
+</html>
