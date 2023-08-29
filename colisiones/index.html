@@ -21,6 +21,7 @@
     var direccion_y = 0;
     var speed = 6;
     var tx = 0, ty = 0;
+    var wx = 225, wy = 300;
     var dir = 0;
     var Color = getRandomColor();
 
@@ -58,11 +59,11 @@
     });
 
     function update() {
-       // ctx.clearRect(0, 0, canvas.width, canvas.height);
+        // ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-       ctx.fillStyle="white";
-       ctx.fillRect(0,0,canvas.width, canvas.height);
-       color = getRandomColor();
+        ctx.fillStyle = "white";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        color = getRandomColor();
         // x = (x + direccion_x + canvas.width) % canvas.width;
         //y = (y + direccion_y + canvas.height) % canvas.height;
 
@@ -102,22 +103,59 @@
             y + 50 > ty) {
 
 
-            tx = Math.random()*500;
-            ty = Math.random()*500;
+            tx = Math.random() * 500;
+            ty = Math.random() * 500;
 
         }
 
-        ctx.fillStyle = color;
-        ctx.fillRect(x, y, 50, 50);
-        ctx.strokeRect(x, y, 50, 50);
+        if (x < wx + 120 &&
 
-        ctx.fillStyle = "black";
-        ctx.fillRect(tx, ty, 20, 20);
-        ctx.strokeRect(tx, ty, 20, 20);
+            x + 50 > wx &&
+
+            y < wy + 20 &&
+
+            y + 50 > wy) {
 
 
-        window.requestAnimationFrame(update);
-    }
+            if (dir == 1) {
+                y += speed;
+
+            }
+
+            if (dir == 2) {
+                y -= speed;
+
+            }
+
+
+            if (dir == 3) {
+                x -= speed;
+
+            }
+
+            if (dir == 4) {
+                x += speed;
+            }
+
+
+        }
+
+    
+    ctx.fillStyle = color;
+    ctx.fillRect(x, y, 50, 50);
+    ctx.strokeRect(x, y, 50, 50);
+
+    ctx.fillStyle = "black";
+    ctx.fillRect(tx, ty, 20, 20);
+    ctx.strokeRect(tx, ty, 20, 20);
+
+    ctx.fillStyle = "gray";
+    ctx.fillRect(wx, wy, 150, 20);
+    ctx.strokeRect(wx, wy, 150, 20);
+
+
+    window.requestAnimationFrame(update);
+        }
 
     function getRandomColor() {
         var r = Math.floor(Math.random() * 256);
