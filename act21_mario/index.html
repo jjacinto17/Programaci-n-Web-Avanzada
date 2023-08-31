@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mario</title>
+    <style>
+        canvas {
+
+            border: 3px black solid;
+        }
+    </style>
+</head>
+
+<body>
+
+    <center>
+        <canvas id="canvas" width="900" height="600"></canvas>
+    </center>
+
+    <script>
+        var canvas = document.getElementById("canvas");
+        var ctx = canvas.getContext("2d");
+
+        canvas.addEventListener("mousedown", (e) => {
+            var rect = canvas.getBoundingClientRect();
+            var mouseX = Math.round(e.clientX - rect.left);
+            var mouseY = Math.round(e.clientY - rect.top);
+
+            console.log(mouseX, mouseY);
+        });
+
+        //fondo
+
+        ctx.fillStyle = "#a2f0ff";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        //arbol
+
+        ctx.beginPath()
+        ctx.fillStyle = "#218304"
+        ctx.arc(70, 500, 40, 0, 2 * Math.PI);
+        ctx.fill();
+        ctx.stroke();
+        ctx.closePath();
+
+        ctx.beginPath()
+        ctx.arc(70, 470, 25, 0, 2 * Math.PI);
+        ctx.fill();
+        ctx.closePath();
+        ctx.beginPath()
+        ctx.arc(70, 470, 25, 3.2, 2 * Math.PI);
+        ctx.stroke();
+        ctx.closePath();
+
+        //piso
+
+        ctx.fillStyle = "#ffc9bd"
+        ctx.fillRect(0, 510, canvas.width, 20);
+        ctx.lineWidth = 4;
+        ctx.strokeStyle = "#62342A"
+        ctx.strokeRect(0, 510, canvas.width, 20);
+        ctx.fillStyle = "#ff9766";
+        ctx.fillRect(0, 530, canvas.width, 80);
+
+        //bloques.colores
+
+        ctx.fillStyle = "black";
+        ctx.fillRect(450, 210, 50, 300);
+
+        ctx.fillStyle = "#71c2ff"
+        ctx.fillRect(294, 185, 180, 323);
+        ctx.strokeStyle = "black";
+        ctx.lineWidth = 4;
+        ctx.strokeRect(294, 185, 180, 323);
+
+        ctx.fillStyle = "black";
+        ctx.fillRect(321, 348, 70, 160);
+
+        ctx.fillStyle = "#ffc0b5";
+        ctx.fillRect(185, 328, 180, 180);
+        ctx.strokeStyle = "black";
+        ctx.lineWidth = 4;
+        ctx.strokeRect(185, 328, 180, 180);
+
+        ctx.fillStyle = "#00dd5b";
+        ctx.fillRect(740, 328, 180, 180);
+        ctx.strokeStyle = "black";
+        ctx.lineWidth = 4;
+        ctx.strokeRect(740, 328, 180, 180);
+        
+
+        //bloques
+
+        ctx.fillStyle = "#ff8a4e"
+        ctx.fillRect(55, 278, 60, 60);
+        ctx.lineWidth = 3;
+        ctx.strokeRect(55, 278, 60, 60);
+
+        ctx.fillRect(142, 48, 60, 60);
+        ctx.lineWidth = 3;
+        ctx.strokeRect(142, 48, 60, 60);
+
+        ctx.fillRect(202, 48, 60, 60);
+        ctx.lineWidth = 3;
+        ctx.strokeRect(202, 48, 60, 60);
+
+        ctx.fillRect(800, 191, 60, 60);
+        ctx.lineWidth = 3;
+        ctx.strokeRect(800, 191, 60, 60);
+
+
+        //tornillos
+
+        ctx.beginPath();
+        ctx.arc(765, 354, 13, 0, 2 * Math.PI);
+        ctx.fillStyle = "#b3bfc0";
+        ctx.fill();
+        ctx.stroke();
+        ctx.closePath();
+
+        ctx.beginPath();
+        ctx.arc(765, 485, 13, 0, 2 * Math.PI);
+        ctx.fill();
+        ctx.stroke();
+        ctx.closePath();
+
+        ctx.beginPath();
+        ctx.arc(451, 210, 13, 0, 2 * Math.PI);
+        ctx.fill();
+        ctx.stroke();
+        ctx.closePath();
+
+        ctx.beginPath();
+        ctx.arc(451, 485, 13, 0, 2 * Math.PI);
+        ctx.fill();
+        ctx.stroke();
+        ctx.closePath();
+
+        ctx.beginPath();
+        ctx.arc(319, 210, 13, 0, 2 * Math.PI);
+        ctx.fill();
+        ctx.stroke();
+        ctx.closePath();
+
+        ctx.beginPath();
+        ctx.arc(343, 350, 13, 0, 2 * Math.PI);
+        ctx.fill();
+        ctx.stroke();
+        ctx.closePath();
+
+        ctx.beginPath();
+        ctx.arc(343, 485, 13, 0, 2 * Math.PI);
+        ctx.fill();
+        ctx.stroke();
+        ctx.closePath();
+
+        ctx.beginPath();
+        ctx.arc(208, 350, 13, 0, 2 * Math.PI);
+        ctx.fill();
+        ctx.stroke();
+        ctx.closePath();
+
+        ctx.beginPath();
+        ctx.arc(208, 485, 13, 0, 2 * Math.PI);
+        ctx.fill();
+        ctx.stroke();
+        ctx.closePath();
+
+        //tubo
+
+        ctx.fillStyle = "#008800";
+        ctx.fillRect(545, 325, 150, 60);
+        ctx.strokeRect(545, 325, 150, 60);
+        ctx.fillRect(553, 387, 135, 121);
+        ctx.strokeRect(553, 387, 135, 121);
+
+        
+
+
+
+
+
+
+
+
+
+    </script>
+
+</body>
+
+</html>
