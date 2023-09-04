@@ -24,6 +24,10 @@
     var tx = 80, ty = 450;
     var dir = 0;
     var Color = getRandomColor();
+    var isPaused = false;
+    const pauseMessage = "pausa";
+    var escore = 0;
+
 
     class CrearObjetos {
         constructor(ctx) {
@@ -54,7 +58,7 @@
                 const colisionY = y < obstaculo.y + obstaculo.alto && y + 50 > obstaculo.y;
 
                 if (colisionX && colisionY) {
-                    
+
                     if (dir == 1) {
                         y += speed;
                     }
@@ -69,7 +73,7 @@
                     }
                 }
             }
-            return { x, y }; 
+            return { x, y };
         }
 
         dibujarComida() {
@@ -78,6 +82,12 @@
             this.ctx.strokeRect(this.comida.x, this.comida.y, 40, 40);
         }
 
+
+        dibujarScore(escore) {
+            ctx.fillStyle = "black";
+            ctx.font = "24px Arial";
+            ctx.fillText("Escore: " + escore, 10, 30);
+        } 
 
         generarComidaAleatoria() {
             this.comida.x = Math.random() * 500;
@@ -90,6 +100,7 @@
     crearObjetos.agregarObstaculo({ x: 130, y: 190, ancho: 250, alto: 30 });
     crearObjetos.agregarObstaculo({ x: 130, y: 350, ancho: 250, alto: 30 });
     crearObjetos.agregarObstaculo({ x: 130, y: 80, ancho: 250, alto: 30 });
+
 
 
     window.requestAnimationFrame = (function () {
@@ -118,6 +129,9 @@
             case 32:
                 speed += 2;
                 break;
+            case 80: // Tecla "P" para pausar/despausar
+                isPaused = !isPaused; // Alternar el estado de pausa
+                break;
         }
 
     });
@@ -128,52 +142,66 @@
         ctx.fillRect(0, 0, canvas.width, canvas.height);
         color = getRandomColor();
 
-        if (dir == 1) {
-            y -= speed;
-            if (y + 50 < 0) {
-                y = canvas.height + 50;
+        if (!isPaused) {
+            if (dir == 1) {
+                y -= speed;
+                if (y + 50 < 0) {
+                    y = canvas.height + 50;
+                }
             }
-        }
 
-        if (dir == 2) {
-            y += speed;
-            if (y + 50 > canvas.height) {
-                y = -50;
+            if (dir == 2) {
+                y += speed;
+                if (y + 50 > canvas.height) {
+                    y = -50;
+                }
             }
-        }
 
-        if (dir == 3) {
-            x += speed;
-            if (x + 50 > canvas.width) {
-                x = -50;
+            if (dir == 3) {
+                x += speed;
+                if (x + 50 > canvas.width) {
+                    x = -50;
+                }
             }
-        }
 
-        if (dir == 4) {
-            x -= speed;
-            if (x + 50 < 0) {
-                x = canvas.width + 50;
+            if (dir == 4) {
+                x -= speed;
+                if (x + 50 < 0) {
+                    x = canvas.width + 50;
+                }
             }
+
+
+            ctx.fillStyle = color;
+            ctx.fillRect(x, y, 50, 50);
+            ctx.strokeRect(x, y, 50, 50);
+
+            if (x < crearObjetos.comida.x + 40 &&
+                x + 50 > crearObjetos.comida.x &&
+                y < crearObjetos.comida.y + 40 &&
+                y + 50 > crearObjetos.comida.y) {
+                crearObjetos.generarComidaAleatoria();
+                escore++;
+            }
+
+            const nuevasCoordenadas = crearObjetos.verificarColisionConObstaculo(x, y, dir, speed);
+            x = nuevasCoordenadas.x;
+            y = nuevasCoordenadas.y;
+
+            crearObjetos.dibujarComida();
+
+            crearObjetos.dibujarScore(escore);
+
+            crearObjetos.dibujarObstaculos();
+
+        } else {
+
+            ctx.fillStyle = "rgba(0, 0, 0, 0.6)";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = "white";
+            ctx.font = "48px Arial";
+            ctx.fillText(pauseMessage, canvas.width / 2 - 70, canvas.height / 2);
         }
-
-        ctx.fillStyle = color;
-        ctx.fillRect(x, y, 50, 50);
-        ctx.strokeRect(x, y, 50, 50);
-
-        if (x < crearObjetos.comida.x + 40 &&
-            x + 50 > crearObjetos.comida.x &&
-            y < crearObjetos.comida.y + 40 &&
-            y + 50 > crearObjetos.comida.y) {
-            crearObjetos.generarComidaAleatoria();
-        }
-
-        const nuevasCoordenadas = crearObjetos.verificarColisionConObstaculo(x, y, dir, speed);
-        x = nuevasCoordenadas.x;
-        y = nuevasCoordenadas.y;
-
-        crearObjetos.dibujarComida();
-
-        crearObjetos.dibujarObstaculos();
 
         window.requestAnimationFrame(update);
     }
