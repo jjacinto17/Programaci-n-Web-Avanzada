@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+</head>
+<style>
+    canvas {
+        border: 3px solid black;
+    }
+</style>
+
+<body>
+    <center><canvas id="canvas" width="500" height="500"></canvas></center>
+</body>
+
+<script>
+    var canvas = document.getElementById('canvas');
+    var ctx = canvas.getContext("2d");
+    var x = 225;
+    var y = 230;
+    var direccion_x = 0;
+    var direccion_y = 0;
+    var speed = 6;
+    var tx = 80, ty = 450;
+    var dir = 0;
+    var Color = getRandomColor();
+
+    class CrearObjetos {
+        constructor(ctx) {
+            this.ctx = ctx;
+            this.obstaculos = [];
+            this.comida = { x: 80, y: 450 };
+        }
+
+        agregarObstaculo(obstaculo) {
+            this.obstaculos.push(obstaculo);
+        }
+
+        dibujarObstaculos() {
+            this.ctx.fillStyle = "gray";
+            this.ctx.strokeStyle = "black";
+
+            for (let i = 0; i < this.obstaculos.length; i++) {
+                const obstaculo = this.obstaculos[i];
+                this.ctx.fillRect(obstaculo.x, obstaculo.y, obstaculo.ancho, obstaculo.alto);
+                this.ctx.strokeRect(obstaculo.x, obstaculo.y, obstaculo.ancho, obstaculo.alto);
+            }
+        }
+
+        verificarColisionConObstaculo(x, y, dir, speed) {
+            for (let i = 0; i < this.obstaculos.length; i++) {
+                const obstaculo = this.obstaculos[i];
+                const colisionX = x < obstaculo.x + obstaculo.ancho && x + 50 > obstaculo.x;
+                const colisionY = y < obstaculo.y + obstaculo.alto && y + 50 > obstaculo.y;
+
+                if (colisionX && colisionY) {
+                    
+                    if (dir == 1) {
+                        y += speed;
+                    }
+                    if (dir == 2) {
+                        y -= speed;
+                    }
+                    if (dir == 3) {
+                        x -= speed;
+                    }
+                    if (dir == 4) {
+                        x += speed;
+                    }
+                }
+            }
+            return { x, y }; 
+        }
+
+        dibujarComida() {
+            this.ctx.fillStyle = "black";
+            this.ctx.fillRect(this.comida.x, this.comida.y, 40, 40);
+            this.ctx.strokeRect(this.comida.x, this.comida.y, 40, 40);
+        }
+
+
+        generarComidaAleatoria() {
+            this.comida.x = Math.random() * 500;
+            this.comida.y = Math.random() * 500;
+        }
+    }
+
+    const crearObjetos = new CrearObjetos(ctx);
+
+    crearObjetos.agregarObstaculo({ x: 130, y: 190, ancho: 250, alto: 30 });
+    crearObjetos.agregarObstaculo({ x: 130, y: 350, ancho: 250, alto: 30 });
+    crearObjetos.agregarObstaculo({ x: 130, y: 80, ancho: 250, alto: 30 });
+
+
+    window.requestAnimationFrame = (function () {
+        return window.requestAnimationFrame ||
+            window.webkitRequestAnimationFrame ||
+            window.mozRequestAnimationFrame ||
+            function (callback) {
+                window.setTimeout(callback, 17);
+            };
+    }());
+
+    document.addEventListener("keydown", (e) => {
+        switch (event.keyCode) {
+            case 37:
+                dir = 4;
+                break;
+            case 38:
+                dir = 1;
+                break;
+            case 39:
+                dir = 3;
+                break;
+            case 40:
+                dir = 2;
+                break;
+            case 32:
+                speed += 2;
+                break;
+        }
+
+    });
+
+    function update() {
+
+        ctx.fillStyle = "white";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        color = getRandomColor();
+
+        if (dir == 1) {
+            y -= speed;
+            if (y + 50 < 0) {
+                y = canvas.height + 50;
+            }
+        }
+
+        if (dir == 2) {
+            y += speed;
+            if (y + 50 > canvas.height) {
+                y = -50;
+            }
+        }
+
+        if (dir == 3) {
+            x += speed;
+            if (x + 50 > canvas.width) {
+                x = -50;
+            }
+        }
+
+        if (dir == 4) {
+            x -= speed;
+            if (x + 50 < 0) {
+                x = canvas.width + 50;
+            }
+        }
+
+        ctx.fillStyle = color;
+        ctx.fillRect(x, y, 50, 50);
+        ctx.strokeRect(x, y, 50, 50);
+
+        if (x < crearObjetos.comida.x + 40 &&
+            x + 50 > crearObjetos.comida.x &&
+            y < crearObjetos.comida.y + 40 &&
+            y + 50 > crearObjetos.comida.y) {
+            crearObjetos.generarComidaAleatoria();
+        }
+
+        const nuevasCoordenadas = crearObjetos.verificarColisionConObstaculo(x, y, dir, speed);
+        x = nuevasCoordenadas.x;
+        y = nuevasCoordenadas.y;
+
+        crearObjetos.dibujarComida();
+
+        crearObjetos.dibujarObstaculos();
+
+        window.requestAnimationFrame(update);
+    }
+
+    function getRandomColor() {
+        var r = Math.floor(Math.random() * 256);
+        var g = Math.floor(Math.random() * 256);
+        var b = Math.floor(Math.random() * 256);
+        return `rgb(${r},${g},${b})`;
+    }
+
+    update();
+
+</script>
+
+</html>
