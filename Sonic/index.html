@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sonic</title>
+    <style>
+        canvas {
+
+            border: 3px black solid;
+        }
+    </style>
+</head>
+
+<body>
+
+    <center>
+        <canvas id="canvas" width="700" height="600"></canvas>
+    </center>
+
+    <script>
+        var canvas = document.getElementById("canvas");
+        var ctx = canvas.getContext("2d");
+        var casillaSize = 30;
+        var numRows = canvas.height / casillaSize;
+        var numCols = canvas.width / casillaSize;
+
+
+        var colorCafeClaro = "#8B4513";
+        var colorCafeOscuro = "#602000";
+
+
+        var alturaPatron = canvas.height / 4 - 50;
+
+        canvas.addEventListener("mousedown", (e) => {
+            var rect = canvas.getBoundingClientRect();
+            var mouseX = Math.round(e.clientX - rect.left);
+            var mouseY = Math.round(e.clientY - rect.top);
+
+            console.log(mouseX, mouseY);
+        });
+
+
+        //fondo
+
+        ctx.fillStyle = "#002285";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        for (var row = numRows - 1; row >= numRows - alturaPatron / casillaSize; row--) {
+            for (var col = 0; col < numCols; col++) {
+                var x = col * casillaSize;
+                var y = row * casillaSize;
+
+                if ((row + col) % 2 === 0) {
+                    ctx.fillStyle = colorCafeClaro;
+                } else {
+                    ctx.fillStyle = colorCafeOscuro;
+                }
+
+
+                ctx.fillRect(x, y, casillaSize, casillaSize);
+            }
+        }
+
+        ctx.fillStyle = "rgba(0,0,0, 0.5)";
+        ctx.fillRect(0, 520, canvas.width, 20);
+        ctx.fillStyle = "#006000";
+        ctx.fillRect(0, 500, canvas.width, 20);
+        ctx.fillStyle = "#40a000";
+        ctx.fillRect(0, 480, canvas.width, 20);
+        ctx.fillStyle = "#80e000";
+        ctx.fillRect(0, 460, canvas.width, 20);
+
+
+        ctx.fillStyle = "#804000";
+        ctx.fillRect(455, 260, 18, 200);
+
+        ctx.beginPath();
+        ctx.moveTo(472, 260);
+        ctx.lineTo(535, 288);
+        ctx.lineTo(526, 262);
+        ctx.lineTo(479, 240);
+        ctx.lineTo(517, 214);
+        ctx.lineTo(463, 235);
+        ctx.lineTo(439, 205);
+        ctx.lineTo(407, 232);
+        ctx.lineTo(401, 265);
+        ctx.fillStyle = "green";
+        ctx.fill();
+        ctx.closePath();
+
+        ctx.lineWidth = 3;
+
+        ctx.beginPath();
+        ctx.arc(87, 417, 25, 0, 2 * Math.PI);
+        ctx.strokeStyle = "yellow";
+        ctx.stroke();
+        ctx.closePath();
+
+        ctx.beginPath();
+        ctx.arc(180, 417, 25, 0, 2 * Math.PI);
+        ctx.strokeStyle = "yellow";
+        ctx.stroke()
+        ctx.closePath();
+        
+        ctx.beginPath();
+        ctx.arc(280, 417, 25, 0, 2 * Math.PI);
+        ctx.strokeStyle = "yellow";
+        ctx.stroke()
+        ctx.closePath();
+
+        ctx.fillStyle = "#40a000";
+        ctx.fillRect(600, 380, 10, 80);
+
+        ctx.beginPath();
+        ctx.arc(605, 378, 30, 0, 2 * Math.PI);
+        ctx.fillStyle = "yellow";
+        ctx.fill();
+
+        ctx.closePath();
+
+
+        ctx.beginPath();
+
+        ctx.arc(605, 378, 15, 0, 2 * Math.PI);
+        ctx.fillStyle = "#602000";
+        ctx.fill();
+
+        ctx.closePath();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </script>
+
+
+
+
+</body>
+
+</html>
