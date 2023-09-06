@@ -13,9 +13,17 @@
     <center><canvas id="canvas" width="500" height="500"></canvas></center>
 </body>
 
+<img src="spiterman.png" id="mi_imagen" style="display: none;" width="50px" height="50px" alt="">
+
+<audio id="comerSonido" controls style="display: none;">
+    <source src="sonido.mp3" type="audio/mpeg">
+</audio>
+
 <script>
     var canvas = document.getElementById('canvas');
     var ctx = canvas.getContext("2d");
+    var spiterman = document.getElementById('mi_imagen');
+    var comerSonido = document.getElementById('comerSonido')
     var x = 225;
     var y = 230;
     var direccion_x = 0;
@@ -26,6 +34,7 @@
     var Color = getRandomColor();
     var isPaused = false;
     var escore = 0;
+   
 
 
     class CrearObjetos {
@@ -171,9 +180,13 @@
             }
 
 
-            ctx.fillStyle = color;
+            /*ctx.fillStyle = color;
             ctx.fillRect(x, y, 50, 50);
-            ctx.strokeRect(x, y, 50, 50);
+            ctx.strokeRect(x, y, 50, 50);*/
+
+            ctx.drawImage(spiterman, x, y, 50, 50);
+
+           
 
             if (x < crearObjetos.comida.x + 40 &&
                 x + 50 > crearObjetos.comida.x &&
@@ -181,6 +194,11 @@
                 y + 50 > crearObjetos.comida.y) {
                 crearObjetos.generarComidaAleatoria();
                 escore++;
+
+
+                comerSonido.pause();
+                comerSonido.currentTime = 0;
+                comerSonido.play();
             }
 
             const nuevasCoordenadas = crearObjetos.verificarColisionConObstaculo(x, y, dir, speed);
